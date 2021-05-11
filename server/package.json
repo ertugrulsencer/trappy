@@ -1,0 +1,15 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Trappy server side",
+  "main": "index.js",
+  "repository": "https://github.com/ertugrulsencer/trappy",
+  "author": "Ertugrul Sencer",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
