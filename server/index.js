@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 const router = require("./router/api");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -10,6 +11,11 @@ mongoose
   )
   .catch((error) => console.log(error));
 
+app.use(
+  cors({
+    origin: "http://localhost:8080",
+  })
+);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({ extended: false }));
 app.use("/api", router);
