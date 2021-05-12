@@ -1,19 +1,21 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const dotenv = require("dotenv");
 const router = require("./router/api");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+dotenv.config();
 mongoose
-  .connect(
-    "mongodb+srv://master:trappy2021@trappy.idj1b.mongodb.net/trappy?retryWrites=true&w=majority",
-    { useNewUrlParser: true, useUnifiedTopology: true }
-  )
+  .connect(process.env.DB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .catch((error) => console.log(error));
 
 app.use(
   cors({
-    origin: "http://localhost:8080",
+    origin: process.env.ACCESS_ORIGIN,
   })
 );
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -25,10 +27,10 @@ app.use("*", (req, res, next) => {
   next();
 });
 
-app.listen(5000, (err) => {
+app.listen(process.env.PORT || 5000, (err) => {
   if (err) {
     console.log(err);
   } else {
-    console.log("Server worked: 5000");
+    console.log("Server worked: " + process.env.PORT || 5000);
   }
 });
