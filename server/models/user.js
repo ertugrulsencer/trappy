@@ -18,6 +18,10 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    user_level: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: { createdAt: "user_created", updatedAt: "user_updated" } }
 );
