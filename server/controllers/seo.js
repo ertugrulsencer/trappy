@@ -6,18 +6,18 @@ module.exports = {
       Seo.find({ page: req.params.page })
         .then((result) => {
           if (result.length) {
-            res.status(200).send(result);
+            res.status(200).json({ message: result });
           } else {
-            res.status(404).send("Seo bulunamadı !");
+            res.status(404).json({ message: "Seo not found" });
           }
         })
-        .catch((error) => res.status(500).send(error));
+        .catch((error) => res.status(500).json({ message: error }));
     } else {
       Seo.find()
         .then((result) => {
-          res.status(200).send(result);
+          res.status(200).json({ message: result });
         })
-        .catch((error) => res.status(500).send(error));
+        .catch((error) => res.status(500).json({ message: error }));
     }
   },
   // Add Seo
@@ -28,7 +28,7 @@ module.exports = {
       .then(() => {
         res.status(201).json({ message: "Seo başarı ile eklendi" });
       })
-      .catch((err) => res.status(400).send("Seo eklenemedi !"));
+      .catch((err) => res.status(400).json({ message: "Seo added" }));
   },
   // Update Seo
   updateSeo: (req, res) => {
@@ -43,14 +43,22 @@ module.exports = {
       data,
       { new: true, upsert: true },
       (err, result) => {
-        res.send(err || result);
+        if (err) {
+          res.json({ message: err });
+        } else {
+          res.json({ message: result });
+        }
       }
     );
   },
   // Delete Seo
   deleteSeo: (req, res) => {
     Seo.deleteMany({ _id: req.params.id }, {}, (err, result) => {
-      res.send(err || result);
+      if (err) {
+        res.json({ message: err });
+      } else {
+        res.json({ message: result });
+      }
     });
   },
 };

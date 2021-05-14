@@ -13,11 +13,11 @@ const addUser = (req, res) => {
     .save()
     .then((data) => {
       console.log(data);
-      res.send(data);
+      res.json({ result: data });
     })
-    .catch((err) => {
-      console.error(err);
-      res.send(err);
+    .catch((error) => {
+      console.error(error);
+      res.json({ message: error });
     });
 };
 module.exports = {
