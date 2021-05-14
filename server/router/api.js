@@ -4,8 +4,8 @@ const {
   addSeo,
   updateSeo,
   deleteSeo,
-} = require("../controllers/seoController");
-const { getUsers, addUser } = require("../controllers/userController");
+} = require("../controllers/seo");
+const { getUsers, addUser } = require("../controllers/user");
 
 /* Seo */
 router.get("/seo/:page", getSeo);

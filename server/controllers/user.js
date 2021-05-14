@@ -11,9 +11,9 @@ const addUser = (req, res) => {
   });
   insertUser
     .save()
-    .then((res) => {
-      console.log(res);
-      res.send(res);
+    .then((data) => {
+      console.log(data);
+      res.send(data);
     })
     .catch((err) => {
       console.error(err);
