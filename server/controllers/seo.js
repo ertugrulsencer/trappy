@@ -1,4 +1,4 @@
-const Seo = require("../models/seo");
+const Seo = require("../models/Seo");
 module.exports = {
   // Get Seo
   getSeo: (req, res) => {
