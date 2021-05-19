@@ -53,9 +53,26 @@ const updateUser = (req, res) => {
     }
   );
 };
+const searchUser = (req, res) => {
+  if (!req.query.user_name) {
+    res.status(500).json({ result: "Geçersiz parametre" });
+  } else {
+    const user_name_regex = new RegExp(req.query.user_name, "i");
+    User.find({ user_name: user_name_regex })
+      .then((users) => {
+        if (users.length) {
+          res.status(200).json(users);
+        } else {
+          res.status(404).json({ message: "User not found" });
+        }
+      })
+      .catch((err) => console.error(err));
+  }
+};
 module.exports = {
   getUsers,
   getUser,
   addUser,
   updateUser,
+  searchUser,
 };

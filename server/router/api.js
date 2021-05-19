@@ -1,6 +1,11 @@
 const router = require("express").Router();
 const { getSeo, addSeo, updateSeo, deleteSeo } = require("../controllers/seo");
-const { getUsers, addUser, updateUser } = require("../controllers/user");
+const {
+  getUsers,
+  addUser,
+  updateUser,
+  searchUser,
+} = require("../controllers/user");
 
 /* Seo */
 router.get("/seo/:page", getSeo);
@@ -12,6 +17,7 @@ router.delete("/seo/:id", deleteSeo);
 router.get("/users", getUsers);
 router.post("/new-user", addUser);
 router.put("/update-user", updateUser);
+router.get("/search-user", searchUser);
 
 // 404
 router.get("*", (req, res) => {
