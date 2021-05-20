@@ -64,10 +64,32 @@ const deleteQuestion = (req, res) => {
     res.status(400).json({ message: "Bad request: Question id required" });
   }
 };
+const checkAnswer = (req, res) => {
+  if (req.body.question_id && req.body.answer) {
+    const question_id = req.body.question_id,
+      answer = req.body.answer;
+    Question.findById(question_id)
+      .then((question) => {
+        if (question.answer == answer) {
+          res.status(200).json({ message: "Correct answer" });
+        } else {
+          res.status(200).json({ message: "Wrong answer" });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } else {
+    res
+      .status(400)
+      .json({ message: "Bad request: Question id and answer required" });
+  }
+};
 /* Exports */
 module.exports = {
   getQuestions,
   addQuestion,
   updateQuestion,
   deleteQuestion,
+  checkAnswer,
 };

@@ -4,6 +4,7 @@ const {
   addQuestion,
   updateQuestion,
   deleteQuestion,
+  checkAnswer,
 } = require("../controllers/questions");
 const { getSeo, addSeo, updateSeo, deleteSeo } = require("../controllers/seo");
 const {
@@ -29,6 +30,7 @@ router.get("/questions", getQuestions);
 router.post("/add-question", addQuestion);
 router.delete("/delete-question", deleteQuestion);
 router.put("/update-question", updateQuestion);
+router.post("/check-answer", checkAnswer);
 
 // 404
 router.get("*", (req, res) => {
