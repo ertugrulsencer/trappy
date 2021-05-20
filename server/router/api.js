@@ -12,6 +12,7 @@ const {
   addUser,
   updateUser,
   searchUser,
+  authUser,
 } = require("../controllers/user");
 
 /* Seo */
@@ -25,6 +26,7 @@ router.get("/users", getUsers);
 router.post("/new-user", addUser);
 router.put("/update-user", updateUser);
 router.get("/search-user", searchUser);
+router.post("/auth-user", authUser);
 /* Question Routes */
 router.get("/questions", getQuestions);
 router.post("/add-question", addQuestion);

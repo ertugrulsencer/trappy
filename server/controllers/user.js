@@ -65,10 +65,38 @@ const searchUser = (req, res) => {
       .catch((err) => console.error(err));
   }
 };
+const authUser = (req, res) => {
+  if (!req.body.user_name && res.body.user_pass) {
+    res
+      .status(400)
+      .json({ message: "Bad request: user_name and user_pass required" });
+  } else {
+    const user_name = req.body.user_name,
+      user_pass = req.body.user_pass;
+    User.find({
+      user_name,
+      user_password: user_pass,
+    })
+      .then((user) => {
+        console.log(user);
+        if (user.length) {
+          res.status(200).json({ message: user });
+        } else {
+          res.status(401).json({ message: "No authentication" });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({ message: err });
+      });
+  }
+};
+
 module.exports = {
   getUsers,
   getUser,
   addUser,
   updateUser,
   searchUser,
+  authUser,
 };
