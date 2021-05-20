@@ -22,17 +22,13 @@ const getUser = (req, res) => {
 };
 /* Add User */
 const addUser = (req, res) => {
-  const insertUser = new User({
-    user_name: "sencertugrul",
-    user_full_name: "Ertuğrul Sencer",
-    user_email: "ertugrul@fribe.org",
-    user_password: "kluiswthAkBnkJBGIJBhjbBjkbjkBıjb",
-  });
+  const newUserData = req.body.user;
+  const insertUser = new User(newUserData);
   insertUser
     .save()
     .then((data) => {
       console.log(data);
-      res.json({ result: data });
+      res.status(201).json({ result: data });
     })
     .catch((error) => {
       console.error(error);
