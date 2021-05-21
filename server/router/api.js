@@ -9,6 +9,7 @@ const {
 const { getSeo, addSeo, updateSeo, deleteSeo } = require("../controllers/seo");
 const {
   getUsers,
+  getUser,
   addUser,
   updateUser,
   searchUser,
@@ -23,6 +24,7 @@ router.put("/seo/:id", updateSeo);
 router.delete("/seo/:id", deleteSeo);
 /* User */
 router.get("/users", getUsers);
+router.get("/user/:user_name", getUser);
 router.post("/new-user", addUser);
 router.put("/update-user", updateUser);
 router.get("/search-user", searchUser);

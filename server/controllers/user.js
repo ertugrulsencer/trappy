@@ -12,13 +12,22 @@ const getUsers = (req, res) => {
 };
 /* Get single user */
 const getUser = (req, res) => {
-  User.find({ user_name: req.body.user_name })
-    .then((result) => {
-      res.json({ message: result });
-    })
-    .catch((error) => {
-      res.json({ message: error });
-    });
+  const { user_name } = req.params;
+  if (user_name) {
+    User.find({ user_name })
+      .then((result) => {
+        if (result.length) {
+          res.status(200).json({ message: result });
+        } else {
+          res.status(404).json({ message: "User not found" });
+        }
+      })
+      .catch((error) => {
+        res.status(200).json({ message: error });
+      });
+  } else {
+    res.status(400).json({ message: "Bad request: user_name required" });
+  }
 };
 /* Add User */
 const addUser = (req, res) => {
