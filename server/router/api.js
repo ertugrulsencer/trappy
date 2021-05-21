@@ -16,6 +16,8 @@ const {
   authUser,
 } = require("../controllers/user");
 
+const { getLearnCards, addLearnCard } = require("../controllers/learn");
+
 /* Seo */
 router.get("/seo/:page", getSeo);
 router.get("/seo", getSeo);
@@ -35,6 +37,9 @@ router.post("/add-question", addQuestion);
 router.delete("/delete-question", deleteQuestion);
 router.put("/update-question", updateQuestion);
 router.post("/check-answer", checkAnswer);
+/* Learn Card Routes */
+router.get("/learn-cards", getLearnCards);
+router.post("/add-learn-card", addLearnCard);
 
 // Not get
 router.get("*", (req, res) => {
