@@ -36,8 +36,17 @@ router.delete("/delete-question", deleteQuestion);
 router.put("/update-question", updateQuestion);
 router.post("/check-answer", checkAnswer);
 
-// 404
+// Not get
 router.get("*", (req, res) => {
-  res.status(404).send("<h1>Sayfa Bulunamadı !</h1>");
+  res.status(404).send('<span style="color: #c81205">Can not GET !</span>');
+});
+router.post("*", (req, res) => {
+  res.status(404).send('<span style="color: #c81205">Can not POST !</span>');
+});
+router.put("*", (req, res) => {
+  res.status(404).send('<span style="color: #c81205">Can not PUT !</span>');
+});
+router.delete("*", (req, res) => {
+  res.status(404).send('<span style="color: #c81205">Can not DELETE !</span>');
 });
 module.exports = router;
