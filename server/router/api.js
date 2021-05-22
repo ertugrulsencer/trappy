@@ -18,6 +18,14 @@ const {
 
 const { getLearnCards, addLearnCard } = require("../controllers/learn");
 
+const {
+  getCourseByKey,
+  getCourse,
+  getCourses,
+  addCourse,
+  updateCourse,
+  deleteCourse,
+} = require("../controllers/courses");
 /* Seo */
 router.get("/seo/:page", getSeo);
 router.get("/seo", getSeo);
@@ -40,6 +48,13 @@ router.post("/check-answer", checkAnswer);
 /* Learn Card Routes */
 router.get("/learn-cards", getLearnCards);
 router.post("/add-learn-card", addLearnCard);
+/* Courses Routes */
+router.get("/course-key/:course_key", getCourseByKey);
+router.get("/course/:course_id", getCourse);
+router.get("/courses", getCourses);
+router.post("/add-course", addCourse);
+router.put("/update-course", updateCourse);
+router.delete("/delete-course", deleteCourse);
 
 // Not get
 router.get("*", (req, res) => {
