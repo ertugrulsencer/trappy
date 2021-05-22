@@ -26,6 +26,14 @@ const {
   updateCourse,
   deleteCourse,
 } = require("../controllers/courses");
+
+const {
+  getLearnQuestion,
+  getLearnQuestions,
+  addLearnQuestion,
+  deleteLearnQuestion,
+} = require("../controllers/learn");
+
 /* Seo */
 router.get("/seo/:page", getSeo);
 router.get("/seo", getSeo);
@@ -55,6 +63,11 @@ router.get("/courses", getCourses);
 router.post("/add-course", addCourse);
 router.put("/update-course", updateCourse);
 router.delete("/delete-course", deleteCourse);
+/* Learn Question Routes */
+router.get("/learn-question/:learn_id", getLearnQuestion);
+router.get("/learn-questions", getLearnQuestions);
+router.post("/add-learn-question", addLearnQuestion);
+router.delete("/delete-learn-question", deleteLearnQuestion);
 
 // Not get
 router.get("*", (req, res) => {
