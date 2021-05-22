@@ -57,6 +57,30 @@ const addLearnQuestion = (req, res) => {
     });
   }
 };
+const updateLearnQuestion = (req, res) => {
+  const { question_id, question } = req.body;
+  if (
+    typeof question_id !== "undefined" ||
+    typeof question !== "undefined" ||
+    typeof question.learn_course_key !== "undefined" ||
+    typeof question.learn_type !== "undefined" ||
+    typeof question.learn_question !== "undefined"
+  ) {
+    Learn.findByIdAndUpdate(question_id, question)
+      .then((result) => {
+        console.log(result);
+        res.status(204).json({ message: result });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({ message: err });
+      });
+  } else {
+    res.status(400).json({
+      message: "Bad request: question_id and question Object required",
+    });
+  }
+};
 const deleteLearnQuestion = (req, res) => {
   const { question_id } = req.body;
   if (typeof question_id !== "undefined") {
@@ -77,5 +101,6 @@ module.exports = {
   getLearnQuestion,
   getLearnQuestions,
   addLearnQuestion,
+  updateLearnQuestion,
   deleteLearnQuestion,
 };

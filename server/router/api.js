@@ -31,6 +31,7 @@ const {
   getLearnQuestion,
   getLearnQuestions,
   addLearnQuestion,
+  updateLearnQuestion,
   deleteLearnQuestion,
 } = require("../controllers/learn");
 
@@ -67,6 +68,7 @@ router.delete("/delete-course", deleteCourse);
 router.get("/learn-question/:learn_id", getLearnQuestion);
 router.get("/learn-questions", getLearnQuestions);
 router.post("/add-learn-question", addLearnQuestion);
+router.put("/update-learn-question", updateLearnQuestion);
 router.delete("/delete-learn-question", deleteLearnQuestion);
 
 // Not get
