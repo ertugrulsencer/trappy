@@ -16,7 +16,7 @@ const {
   authUser,
 } = require("../controllers/user");
 
-const { getLearnCards, addLearnCard } = require("../controllers/learn");
+const { getLearnCards, addLearnCard } = require("../controllers/learnCards");
 
 const {
   getCourseByKey,
