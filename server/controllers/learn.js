@@ -97,9 +97,50 @@ const deleteLearnQuestion = (req, res) => {
     res.status(400).json({ message: "Bad request: question_id required" });
   }
 };
+const checkLearnQuestion = (req, res) => {
+  let { question_id, question_answer } = req.body;
+  if (
+    typeof question_id !== "undefined" ||
+    typeof question_answer !== "undefined"
+  ) {
+    Learn.findById(question_id)
+      .then((question) => {
+        question_answer = question_answer.toLowerCase();
+        switch (question.learn_type) {
+          case "text":
+          case "options":
+            if (question.correct_answer.toLowerCase() === question_answer) {
+              res.status(200).json({ message: "Correct answer" });
+            } else {
+              res.status(200).json({ message: "Wrong answer" });
+            }
+            break;
+          case "select_picture":
+            if (question[Number(question_answer)].isCorrect === true) {
+              res.status(200).json({ message: "Correct answer" });
+            } else {
+              res.status(200).json({ message: "Wrong answer" });
+            }
+            break;
+          default:
+            res.status(500).json({ message: "Learn type not found" });
+            break;
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({ message: err });
+      });
+  } else {
+    res
+      .status(400)
+      .json({ message: "Bad request: question_id, question_answer required" });
+  }
+};
 module.exports = {
   getLearnQuestion,
   getLearnQuestions,
+  checkLearnQuestion,
   addLearnQuestion,
   updateLearnQuestion,
   deleteLearnQuestion,

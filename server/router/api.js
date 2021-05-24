@@ -30,6 +30,7 @@ const {
 const {
   getLearnQuestion,
   getLearnQuestions,
+  checkLearnQuestion,
   addLearnQuestion,
   updateLearnQuestion,
   deleteLearnQuestion,
@@ -70,6 +71,7 @@ router.get("/learn-questions", getLearnQuestions);
 router.post("/add-learn-question", addLearnQuestion);
 router.put("/update-learn-question", updateLearnQuestion);
 router.delete("/delete-learn-question", deleteLearnQuestion);
+router.post("/check-learn-question", checkLearnQuestion);
 
 // Not get
 router.get("*", (req, res) => {
