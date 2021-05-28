@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const auth = require("../middlewares/auth");
 const {
   getQuestions,
   addQuestion,
@@ -66,12 +67,12 @@ router.post("/add-course", addCourse);
 router.put("/update-course", updateCourse);
 router.delete("/delete-course", deleteCourse);
 /* Learn Question Routes */
-router.get("/learn-question/:learn_id", getLearnQuestion);
-router.get("/learn-questions", getLearnQuestions);
+router.get("/learn-question/:learn_id", auth, getLearnQuestion);
+router.get("/learn-questions", auth, getLearnQuestions);
 router.post("/add-learn-question", addLearnQuestion);
 router.put("/update-learn-question", updateLearnQuestion);
 router.delete("/delete-learn-question", deleteLearnQuestion);
-router.post("/check-learn-question", checkLearnQuestion);
+router.post("/check-learn-question", auth, checkLearnQuestion);
 
 // Not get
 router.get("*", (req, res) => {

@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const jwt = require("jsonwebtoken");
 
 /* Get Users */
 const getUsers = (req, res) => {
@@ -89,7 +90,17 @@ const authUser = (req, res) => {
       .then((user) => {
         console.log(user);
         if (user.length) {
-          res.status(200).json({ message: user });
+          let token = jwt.sign(
+            {
+              user_id: user._id,
+              user_name: user.user_name,
+            },
+            process.env.ACCESS_TOKEN_SECRET,
+            {
+              expiresIn: process.env.ACCESS_TOKEN_EXPIRES,
+            }
+          );
+          res.status(200).json({ message: user, token });
         } else {
           res.status(401).json({ message: "No authentication" });
         }
